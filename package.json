@@ -1,0 +1,20 @@
+{
+  "name": "deep-learning-visualizer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "可交互的深度学习架构可视化教学项目：从神经网络基础到 Transformer 推理全流程",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7"
+  }
+}
