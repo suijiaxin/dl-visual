@@ -15,6 +15,8 @@
 
 跑的是**真实的数学运算**，不是预录的动画。真的 softmax、真的反向传播、真的 KV Cache 增长曲线 —— 改参数就能看到数值实时变化。面向想系统理解大模型底层逻辑的人，尤其是训推方向的 AI 产品经理。
 
+> 内置**两个领域**，点左上角标题下拉切换：**深度学习架构可视化**（神经网络 → Transformer → 大模型生命周期）与**机器学习架构可视化**（经典 ML：分类/回归/聚类/时序/评分卡）。
+
 ## 目录
 
 - [特性](#-特性)
@@ -78,16 +80,41 @@ npm run preview  # 本地预览打包结果
 
 > 这条链路刻意覆盖了 PM 最该懂的全貌：**文本怎么变数字 → 怎么训出 base 模型 → 怎么对齐成助手 → 怎么低成本微调 → 怎么高效推理**。
 
+### 机器学习架构可视化（另一个领域）
+
+点左上角标题下拉切到「机器学习架构可视化」，从经典 ML 的演进一路走到主流应用场景，覆盖分类、回归、聚类、时序、评分卡，并配有特征工程与五个完整实战案例（鸢尾花 / 泰坦尼克 / 波士顿房价 / 客户分群 / 航空客流）。每个模块同样跑真实计算，并点明对应的主流框架（sklearn / XGBoost / LightGBM / statsmodels）。
+
+| 编号 | 模块 | 你会学到 / 能动手做什么 |
+|:----:|------|------------------------|
+| 00 | **演进史 · 场景地图** | 线性模型→树→集成→XGBoost 的时间线 +「场景→算法→框架」对照表 |
+| 01 | **线性回归** | 拖散点，实时最小二乘拟合，看残差 / R² / MSE |
+| 02 | **逻辑回归 · 分类** | 调权重移动决策边界，看 sigmoid 概率场与交叉熵 |
+| 03 | **决策树** | 真实按基尼增益递归分裂；调深度看决策边界 + 树结构、观察过拟合 |
+| 04 | **随机森林 · Bagging** | 多棵树投票，调树数量看边界从锯齿变平滑、方差下降 |
+| 05 | **梯度提升 · GBDT/XGBoost** | 逐轮拟合残差动画；调学习率/轮数看预测逼近目标 |
+| 06 | **KNN 与 SVM** | KNN 最近邻投票（点击放查询点）+ SVM 最大间隔与支持向量 |
+| 07 | **K-Means 聚类** | 单步「分配→更新质心」迭代动画 + 肘部法选 k |
+| 08 | **PCA 降维** | 2D→1D 主成分投影，调相关性看方差解释比例 |
+| 09 | **时序预测** | 趋势+季节+残差分解 + 移动平均/指数平滑/外推对比 |
+| 10 | **评分卡 · 模型评估** | WOE 分箱→逻辑回归→标准分(PDO)映射；ROC/AUC/KS + 批贷阈值权衡 |
+| 11 | **特征工程** | 一份脏数据走完缺失值填充→编码→标准化→分箱→交互特征流水线 |
+| 12 | **实战 · 鸢尾花分类** | 真实数据集：划分→标准化(防泄漏)→分类→准确率+混淆矩阵 |
+| 13 | **实战 · 泰坦尼克生还** | 脏数据全流程：缺失填充→特征衍生→One-Hot→真实梯度下降逻辑回归 |
+| 14 | **实战 · 波士顿房价** | 多元线性回归：标准化→训练→系数解读→预测vs真实+R²（含数据集弃用说明） |
+| 15 | **实战 · 客户分群** | K-Means 商业经典：年收入×消费分群→营销画像→肘部法选 k |
+| 16 | **实战 · 航空客流** | 时序教科书数据集 AirPassengers：趋势×乘性季节→预测+MAPE 评估 |
+
 ## 📁 项目结构
 
 ```
 src/
-├── App.jsx              # 导航 + 模块路由，想增删模块改这里
-├── lib/mathx.js         # 共享数学库：softmax、矩阵乘、激活函数、权重初始化
+├── App.jsx              # 两个领域(DL/ML)的导航定义 + 品牌区下拉切换 + 模块路由
+├── lib/mathx.js         # 共享数学库：softmax、矩阵乘、激活函数；以及 ML 通用函数
+│                        #   （最小二乘、基尼/熵、K-Means、PCA、平滑等）
 │                        #   👉 改这里，所有模块的计算会跟着变
 ├── components/ui.jsx    # 共享 UI 组件：Slider / Card / Callout / 热力色
 ├── styles/global.css    # 全局样式与配色变量（顶部 :root 改主题色）
-└── modules/             # 11 个教学模块，每个独立、互不依赖
+└── modules/             # 深度学习 11 个模块 + ml/ 子目录下机器学习 11 个模块
     ├── Overview.jsx         # 演变时间线 + 生命周期预览（改 TIMELINE 数组即可加节点）
     ├── NeuralNet.jsx        # 改 LAYERS 改网络结构
     ├── Backprop.jsx         # 改 TARGETS 加拟合目标；改 OPTIMIZERS 改优化器；改 H 改隐藏层宽度
@@ -98,7 +125,25 @@ src/
     ├── Tokenizer.jsx        # 改 GRANULARITY；runBPE 是真实的 BPE 实现
     ├── TrainingPipeline.jsx # 改 STAGES 改训练三阶段的说明
     ├── FineTuning.jsx       # 改 dim/rank 看 LoRA 参数量；公式在 stats 里
-    └── Inference.jsx        # 改 PROMPT / GEN 改演示序列
+    ├── Inference.jsx        # 改 PROMPT / GEN 改演示序列
+    └── ml/                  # 机器学习领域
+        ├── MLOverview.jsx       # 改 TIMELINE / SCENARIOS 改演进史与场景地图
+        ├── LinearRegression.jsx # 改 INIT 改初始散点
+        ├── LogisticRegression.jsx # 改 CLASS0/CLASS1 改两类样本
+        ├── DecisionTree.jsx     # 改 DATA 改数据；真实按基尼增益递归建树
+        ├── RandomForest.jsx     # 改 genData / buildForest 改森林
+        ├── Boosting.jsx         # 改 TRUE_FN 改拟合目标；runGBDT 是真实残差提升
+        ├── KNN_SVM.jsx          # 改 PTS 改样本；trainSVM 真实跑 hinge loss 梯度下降
+        ├── Clustering.jsx       # 改 genPoints 改簇；kmeansStep 真实迭代
+        ├── DimReduction.jsx     # 改 genPoints；pca2d 真实协方差特征分解
+        ├── TimeSeries.jsx       # 改 trend/season 改成分；真实分解+平滑
+        ├── Scorecard.jsx        # 改 PDO/基准分看评分刻度；真实算 ROC/AUC/KS
+        ├── FeatureEngineering.jsx # 改 RAW 改脏数据；逐步演示特征工程流水线
+        ├── IrisClassification.jsx # 真实鸢尾花子集；最近质心分类 + 混淆矩阵
+        ├── Titanic.jsx         # 真实风格子集；预处理+特征衍生+梯度下降逻辑回归
+        ├── BostonHousing.jsx   # 多元线性回归；改 RAW 改样本（含数据集弃用说明）
+        ├── MallCustomers.jsx   # 商场客户分群；真实 K-Means + 营销画像
+        └── AirPassengers.jsx   # 航空客流时序经典；趋势×乘性季节预测 + MAPE
 ```
 
 ## 🔧 自定义

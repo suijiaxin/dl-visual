@@ -69,17 +69,43 @@ body {
   background: var(--bg-elev);
   border-right: 1px solid var(--border);
   height: 100vh;
-  overflow-y: auto;
   position: sticky;
   top: 0;
-  padding: 20px 0;
+  padding: 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .sidebar-brand {
   padding: 0 20px 18px;
   border-bottom: 1px solid var(--border-soft);
-  margin-bottom: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: relative;
 }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+.brand-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 4px 6px 4px 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.12s;
+  text-align: left;
+}
+.brand-switcher:hover { background: var(--bg-card); }
 .sidebar-brand h1 {
   font-size: 16px;
   font-weight: 700;
@@ -89,10 +115,69 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.sidebar-brand p {
+.brand-caret {
   font-size: 11px;
   color: var(--text-faint);
-  margin-top: 4px;
+  transition: transform 0.18s;
+  flex-shrink: 0;
+}
+.brand-caret.open { transform: rotate(180deg); }
+
+.brand-menu {
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  right: 16px;
+  margin-top: -6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  padding: 6px;
+  z-index: 50;
+}
+.brand-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 10px;
+  background: none;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.12s;
+}
+.brand-menu-item:hover { background: var(--bg-elev); color: var(--text); }
+.brand-menu-item.active { color: var(--text); }
+.brand-menu-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  flex-shrink: 0;
+}
+.brand-menu-check {
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 12px;
+}
+.brand-github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.12s, transform 0.12s;
+}
+.brand-github:hover {
+  color: var(--text);
+  transform: translateY(-1px);
 }
 
 .nav-group-label {
@@ -373,3 +458,36 @@ svg text { font-family: var(--sans); }
   transition: transform 0.3s ease;
 }
 .theme-toggle:hover .toggle-icon { transform: rotate(20deg); }
+
+/* ===== 机器学习「场景→算法→框架」对照表 ===== */
+.ml-map {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.ml-map th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-faint);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.ml-map td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: top;
+}
+.ml-map tbody tr { transition: background 0.12s; }
+.ml-map tbody tr:hover { background: var(--bg-elev); }
+.ml-map tbody tr:last-child td { border-bottom: none; }
+.ml-map-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
