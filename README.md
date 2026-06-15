@@ -60,10 +60,10 @@ npm run preview  # 本地预览打包结果
 | 编号 | 模块 | 你会学到 / 能动手做什么 |
 |:----:|------|------------------------|
 | 00 | **架构演变史** | 从感知机到大模型的时间线 + 生命周期预览图 |
-| 01 | **神经元与前向传播** | 拖输入、换激活函数，看数值在网络里实时流动 |
-| 02 | **反向传播 · 优化器** | 真实训练 MLP；调学习率、切换 SGD/Momentum/Adam 看收敛差异 |
+| 01 | **神经元与前向传播** | 拖输入、换激活函数，看数值在网络里实时流动（即 MLP / FNN / DNN 的基本结构） |
+| 02 | **反向传播 · 优化器** | 真实训练一个 MLP（多层感知机/DNN）；调学习率、切换 SGD/Momentum/Adam 看收敛差异 |
 | 03 | **CNN 卷积网络** | 画图案、选卷积核，看特征图实时响应 |
-| 04 | **RNN / LSTM** | 时序展开；亲眼看 RNN 梯度消失、LSTM 门控 |
+| 04 | **RNN / LSTM / GRU** | 时序展开；亲眼看 RNN 梯度消失、对比 LSTM 三门与 GRU 两门的门控 |
 | 05 | **注意力机制** | 改句子，看真实的 Q·Kᵀ/√d → softmax 注意力热图 |
 | 06 | **Transformer 整体架构** | 点击数据流图每个组件；对比 Decoder-Only 与 Encoder-Decoder |
 
@@ -92,7 +92,7 @@ src/
     ├── NeuralNet.jsx        # 改 LAYERS 改网络结构
     ├── Backprop.jsx         # 改 TARGETS 加拟合目标；改 OPTIMIZERS 改优化器；改 H 改隐藏层宽度
     ├── CNN.jsx              # 改 KERNELS 加新卷积核
-    ├── RNNLSTM.jsx          # 改 LSTM 门权重看门控行为
+    ├── RNNLSTM.jsx          # 改 LSTM/GRU 门权重看门控行为（含朴素 RNN / LSTM / GRU 三种）
     ├── Attention.jsx        # 改 D（向量维度）、DEFAULT_TOKENS
     ├── TransformerArch.jsx  # 改 COMPONENTS 改组件说明
     ├── Tokenizer.jsx        # 改 GRANULARITY；runBPE 是真实的 BPE 实现

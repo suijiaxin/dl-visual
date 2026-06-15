@@ -39,6 +39,21 @@ export default function RNNLSTM() {
     return out
   }, [seq])
 
+  // GRU 前向（简化标量版，固定一组门权重，演示更新门/重置门）
+  // GRU 把 LSTM 的三门精简成两门，并去掉独立记忆细胞 c，只保留隐状态 h
+  const gruStates = useMemo(() => {
+    let h = 0
+    const out = [{ h: 0, z: 0, r: 0, hTilde: 0 }]
+    seq.forEach((x) => {
+      const z = sigmoid(1.0 * x + 0.7 * h + 0.2) // 更新门：保留旧记忆 vs 写入新值
+      const r = sigmoid(0.9 * x + 0.6 * h - 0.1) // 重置门：旧记忆参与候选的程度
+      const hTilde = Math.tanh(1.1 * x + 0.8 * (r * h)) // 候选隐状态
+      h = (1 - z) * h + z * hTilde // 线性插值：z 越大越偏向新候选
+      out.push({ h, z, r, hTilde })
+    })
+    return out
+  }, [seq])
+
   // 梯度消失演示：RNN 中早期输入对最终隐状态的影响 ≈ wh^t * (1-h^2)连乘
   const gradFlow = useMemo(() => {
     const out = []
@@ -51,7 +66,7 @@ export default function RNNLSTM() {
     return out
   }, [rnnStates, wh, seq])
 
-  const states = mode === 'rnn' ? rnnStates : lstmStates
+  const states = mode === 'rnn' ? rnnStates : mode === 'lstm' ? lstmStates : gruStates
   const W = 720, H = 200
   const stepX = W / (seq.length + 1)
   const hY = (h) => H / 2 - h * 60
@@ -65,25 +80,31 @@ export default function RNNLSTM() {
       <PageHeader
         eyebrow="04 · RNN / LSTM"
         title="时序网络：让信息沿时间步流动"
-        lead="处理序列（文字、语音、股价）需要「记忆」。RNN 引入一个隐状态 h，每个时间步把当前输入和上一步的记忆揉在一起，再传给下一步。但朴素 RNN 记不住远处的信息——梯度会指数衰减。LSTM 用三道门控精细管理记忆，是 Transformer 之前序列建模的王者。"
+        lead="处理序列（文字、语音、股价）需要「记忆」。RNN 引入一个隐状态 h，每个时间步把当前输入和上一步的记忆揉在一起，再传给下一步。但朴素 RNN 记不住远处的信息——梯度会指数衰减。LSTM 用三道门控精细管理记忆；GRU 把它精简成两门、参数更少、更快，二者都是 Transformer 之前序列建模的王者。"
       />
 
       <div className="btn-row" style={{ marginBottom: 16 }}>
         <button className={`btn ${mode === 'rnn' ? '' : 'secondary'}`} onClick={() => setMode('rnn')}>朴素 RNN</button>
         <button className={`btn ${mode === 'lstm' ? '' : 'secondary'}`} onClick={() => setMode('lstm')}>LSTM 门控</button>
+        <button className={`btn ${mode === 'gru' ? '' : 'secondary'}`} onClick={() => setMode('gru')}>GRU 门控</button>
       </div>
 
       <Card
-        title={mode === 'rnn' ? 'RNN 沿时间展开' : 'LSTM 沿时间展开'}
+        title={mode === 'rnn' ? 'RNN 沿时间展开' : mode === 'lstm' ? 'LSTM 沿时间展开' : 'GRU 沿时间展开'}
         sub={mode === 'rnn'
           ? 'h_t = tanh(W_h · h_{t-1} + W_x · x_t)，每个圆是一个时间步的隐状态'
-          : '记忆细胞 c_t 像一条传送带，三道门决定写入/遗忘/输出多少'}
+          : mode === 'lstm'
+            ? '记忆细胞 c_t 像一条传送带，三道门决定写入/遗忘/输出多少'
+            : '只有隐状态 h，更新门 z 在「保留旧记忆」和「写入新候选」之间线性插值'}
       >
         {mode === 'rnn' && (
           <Formula>hₜ = tanh( W_h · hₜ₋₁ + W_x · xₜ )</Formula>
         )}
         {mode === 'lstm' && (
           <Formula>fₜ=σ(...)　iₜ=σ(...)　oₜ=σ(...)　cₜ = fₜ·cₜ₋₁ + iₜ·c̃ₜ　hₜ = oₜ·tanh(cₜ)</Formula>
+        )}
+        {mode === 'gru' && (
+          <Formula>zₜ=σ(...)　rₜ=σ(...)　h̃ₜ = tanh(W·xₜ + U·(rₜ·hₜ₋₁))　hₜ = (1−zₜ)·hₜ₋₁ + zₜ·h̃ₜ</Formula>
         )}
 
         {mode === 'rnn' && (
@@ -122,6 +143,15 @@ export default function RNNLSTM() {
                     <rect x={cx - 18} y={hY(st.h) + 26} width={36 * st.f} height={6} rx={3} fill="var(--orange)" />
                   </g>
                 )}
+                {/* GRU 门控指示：上条=更新门 z，下条=重置门 r */}
+                {mode === 'gru' && (
+                  <g>
+                    <rect x={cx - 18} y={hY(st.h) + 26} width={36} height={6} rx={3} fill="var(--border)" />
+                    <rect x={cx - 18} y={hY(st.h) + 26} width={36 * st.z} height={6} rx={3} fill="var(--accent)" />
+                    <rect x={cx - 18} y={hY(st.h) + 35} width={36} height={6} rx={3} fill="var(--border)" />
+                    <rect x={cx - 18} y={hY(st.h) + 35} width={36 * st.r} height={6} rx={3} fill="var(--green)" />
+                  </g>
+                )}
               </g>
             )
           })}
@@ -134,6 +164,11 @@ export default function RNNLSTM() {
         {mode === 'lstm' && (
           <div style={{ fontSize: 11, color: 'var(--text-faint)', marginTop: 6 }}>
             橙色条 = 遗忘门开度 fₜ（满格=完全保留上一刻记忆，空=完全遗忘）
+          </div>
+        )}
+        {mode === 'gru' && (
+          <div style={{ fontSize: 11, color: 'var(--text-faint)', marginTop: 6 }}>
+            紫色条 = 更新门 zₜ（满格=完全采纳新候选）；绿色条 = 重置门 rₜ（满格=旧记忆完全参与候选）
           </div>
         )}
 
@@ -171,15 +206,26 @@ export default function RNNLSTM() {
       )}
 
       <div className="grid-2">
-        <Card title="LSTM 的三道门">
-          <div className="prose" style={{ fontSize: 13 }}>
-            <p><strong style={{ color: 'var(--orange)' }}>遗忘门 f：</strong> 决定上一刻的记忆 c 保留多少（0=全忘，1=全留）。</p>
-            <p><strong style={{ color: 'var(--green)' }}>输入门 i：</strong> 决定当前新信息写入记忆多少。</p>
-            <p><strong style={{ color: 'var(--accent)' }}>输出门 o：</strong> 决定记忆中有多少暴露为当前输出 h。</p>
-            <p>记忆细胞 c 的更新是<strong>加法</strong>为主（c = f·c + i·c̃），不像 RNN 全是连乘，所以梯度能沿 c 较稳定地往回传。</p>
-          </div>
-        </Card>
-        <Card title="RNN/LSTM 的根本瓶颈">
+        {mode !== 'gru' ? (
+          <Card title="LSTM 的三道门">
+            <div className="prose" style={{ fontSize: 13 }}>
+              <p><strong style={{ color: 'var(--orange)' }}>遗忘门 f：</strong> 决定上一刻的记忆 c 保留多少（0=全忘，1=全留）。</p>
+              <p><strong style={{ color: 'var(--green)' }}>输入门 i：</strong> 决定当前新信息写入记忆多少。</p>
+              <p><strong style={{ color: 'var(--accent)' }}>输出门 o：</strong> 决定记忆中有多少暴露为当前输出 h。</p>
+              <p>记忆细胞 c 的更新是<strong>加法</strong>为主（c = f·c + i·c̃），不像 RNN 全是连乘，所以梯度能沿 c 较稳定地往回传。</p>
+            </div>
+          </Card>
+        ) : (
+          <Card title="GRU 的两道门 · 比 LSTM 更精简">
+            <div className="prose" style={{ fontSize: 13 }}>
+              <p><strong style={{ color: 'var(--accent)' }}>更新门 z：</strong> 一道门同时干了 LSTM 遗忘门+输入门的活——在「保留旧 h」和「写入新候选 h̃」之间线性插值（z=0 全保留，z=1 全更新）。</p>
+              <p><strong style={{ color: 'var(--green)' }}>重置门 r：</strong> 决定计算候选 h̃ 时，旧记忆 h 参与多少（r≈0 等于「忘掉过去、只看当前输入」）。</p>
+              <p>GRU <strong>没有独立的记忆细胞 c</strong>，只用一个隐状态 h，门也从 3 个减到 2 个——<strong>参数更少、算得更快</strong>，多数任务上效果与 LSTM 相当。</p>
+              <p>更新式 h = (1−z)·h + z·h̃ 同样以<strong>加法/插值</strong>为主，因此和 LSTM 一样有缓解梯度消失的「高速公路」。</p>
+            </div>
+          </Card>
+        )}
+        <Card title="RNN/LSTM/GRU 的根本瓶颈">
           <div className="prose" style={{ fontSize: 13 }}>
             <p>
               无论 RNN 还是 LSTM，都必须<strong>严格按时间步串行</strong>计算——算第 t 步必须先算完 t-1 步。

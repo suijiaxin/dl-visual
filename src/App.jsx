@@ -29,7 +29,7 @@ const NAV = [
     group: '经典架构',
     items: [
       { id: 'cnn', num: '03', label: 'CNN 卷积网络', comp: CNN },
-      { id: 'rnn', num: '04', label: 'RNN / LSTM 时序网络', comp: RNNLSTM },
+      { id: 'rnn', num: '04', label: 'RNN / LSTM / GRU 时序网络', comp: RNNLSTM },
     ],
   },
   {

@@ -28,10 +28,10 @@ const TIMELINE = [
     nav: 'cnn',
   },
   {
-    year: '1990s / 1997',
-    name: 'RNN → LSTM',
+    year: '1990s / 1997 / 2014',
+    name: 'RNN → LSTM → GRU',
     color: 'var(--orange)',
-    idea: 'RNN 用隐状态沿时间步传递记忆；LSTM 加入门控解决梯度消失，能记更长的依赖。',
+    idea: 'RNN 用隐状态沿时间步传递记忆；LSTM 加入三道门控解决梯度消失；GRU 把门精简成两道，更轻更快。',
     pain: '必须按时间步串行计算，无法并行；超长序列依然吃力。',
     nav: 'rnn',
   },
