@@ -1,0 +1,202 @@
+<mxfile host="Electron">
+  <diagram name="第 1 页" id="d-NXq4mqVkgcRVyTB_-q">
+    <mxGraphModel dx="1225" dy="1151" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TAIChgi563loBAJujnBr-2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="推理阶段" vertex="1">
+          <mxGeometry height="1258" width="703" x="40" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-3" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="逐Token生成循环" vertex="1">
+          <mxGeometry height="744" width="663" x="60" y="1859" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-4" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="训练阶段" vertex="1">
+          <mxGeometry height="1256" width="366" x="211" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="原始语料" vertex="1">
+          <mxGeometry height="54" width="124" x="357" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-6" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="数据清洗与Tokenization" vertex="1">
+          <mxGeometry height="54" width="230" x="304" y="169" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-7" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="构建训练样本&#xa;（固定长度上下文）" vertex="1">
+          <mxGeometry height="78" width="204" x="317" y="273" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-8" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="加载模型初始权重" vertex="1">
+          <mxGeometry height="54" width="188" x="325" y="401" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-9" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="前向传播" vertex="1">
+          <mxGeometry height="118" width="118" x="360" y="505" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-10" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="计算损失&#xa;（交叉熵等）" vertex="1">
+          <mxGeometry height="78" width="156" x="272" y="673" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-11" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="反向传播计算梯度" vertex="1">
+          <mxGeometry height="54" width="188" x="256" y="801" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="优化器更新权重" vertex="1">
+          <mxGeometry height="54" width="172" x="264" y="905" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-13" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="是否收敛？" vertex="1">
+          <mxGeometry height="134" width="134" x="352" y="1009" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-14" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="保存模型检查点" vertex="1">
+          <mxGeometry height="54" width="172" x="333" y="1217" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-15" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="用户输入 Prompt" vertex="1">
+          <mxGeometry height="54" width="180" x="329" y="1395" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-16" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#e1f5fe;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Prefill 预填充阶段" vertex="1">
+          <mxGeometry height="54" width="188" x="325" y="1499" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-17" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#e1f5fe;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="逐层计算Attention&#xa;并生成首个Token的KV Cache" vertex="1">
+          <mxGeometry height="102" width="260" x="289" y="1603" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-18" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="获得第一个输出Token" vertex="1">
+          <mxGeometry height="54" width="213" x="312" y="1755" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-19" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Decode 自回归解码阶段" vertex="1">
+          <mxGeometry height="54" width="230" x="304" y="1884" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-20" parent="1" style="rhombus;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="是否遇到停止符&#xa;或达到最大长度？" vertex="1">
+          <mxGeometry height="206" width="206" x="233" y="1988" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-21" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="返回完整生成文本" vertex="1">
+          <mxGeometry height="54" width="188" x="105" y="2280" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-22" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff3e0;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="将上一步输出Token作为当前输入" vertex="1">
+          <mxGeometry height="78" width="260" x="343" y="2268" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-23" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=#fff3e0;strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="仅对新Token计算Attention&#xa;复用KV Cache" vertex="1">
+          <mxGeometry height="78" width="249" x="349" y="2396" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-24" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="采样得到下一个Token" vertex="1">
+          <mxGeometry height="54" width="213" x="449" y="2524" as="geometry" />
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-25" edge="1" parent="1" source="TAIChgi563loBAJujnBr-5" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-6" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-26" edge="1" parent="1" source="TAIChgi563loBAJujnBr-6" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-27" edge="1" parent="1" source="TAIChgi563loBAJujnBr-7" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-8" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-28" edge="1" parent="1" source="TAIChgi563loBAJujnBr-8" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-9" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-29" edge="1" parent="1" source="TAIChgi563loBAJujnBr-9" style="curved=1;startArrow=none;endArrow=block;exitX=0.09;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="648" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-30" edge="1" parent="1" source="TAIChgi563loBAJujnBr-10" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-11" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-31" edge="1" parent="1" source="TAIChgi563loBAJujnBr-11" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-12" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-32" edge="1" parent="1" source="TAIChgi563loBAJujnBr-12" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.13;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-13" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="984" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-33" edge="1" parent="1" source="TAIChgi563loBAJujnBr-13" style="curved=1;startArrow=none;endArrow=block;exitX=0.87;exitY=0;entryX=0.91;entryY=1;rounded=0;" target="TAIChgi563loBAJujnBr-9" value="否">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="487" y="984" />
+              <mxPoint x="487" y="648" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-34" edge="1" parent="1" source="TAIChgi563loBAJujnBr-13" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-14" value="是">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-35" edge="1" parent="1" source="TAIChgi563loBAJujnBr-15" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-16" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-36" edge="1" parent="1" source="TAIChgi563loBAJujnBr-16" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-37" edge="1" parent="1" source="TAIChgi563loBAJujnBr-17" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-18" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-38" edge="1" parent="1" source="TAIChgi563loBAJujnBr-18" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-39" edge="1" parent="1" source="TAIChgi563loBAJujnBr-19" style="curved=1;startArrow=none;endArrow=block;exitX=0.31;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-20" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="336" y="1963" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-40" edge="1" parent="1" source="TAIChgi563loBAJujnBr-20" style="curved=1;startArrow=none;endArrow=block;exitX=0.01;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-21" value="是">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="199" y="2231" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-41" edge="1" parent="1" source="TAIChgi563loBAJujnBr-20" style="curved=1;startArrow=none;endArrow=block;exitX=0.99;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-22" value="否">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="473" y="2231" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-42" edge="1" parent="1" source="TAIChgi563loBAJujnBr-22" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-23" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-43" edge="1" parent="1" source="TAIChgi563loBAJujnBr-23" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.3;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-24" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="473" y="2499" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-44" edge="1" parent="1" source="TAIChgi563loBAJujnBr-24" style="curved=1;startArrow=none;endArrow=block;exitX=0.7;exitY=0;entryX=0.99;entryY=1;rounded=0;" target="TAIChgi563loBAJujnBr-19" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="638" y="2499" />
+              <mxPoint x="638" y="1963" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TAIChgi563loBAJujnBr-45" edge="1" parent="1" source="TAIChgi563loBAJujnBr-14" style="curved=1;dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;" target="TAIChgi563loBAJujnBr-15" value="加载训练好的权重">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

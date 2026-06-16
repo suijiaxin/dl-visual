@@ -8,12 +8,13 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-贡献)
+[![Built with Claude](https://img.shields.io/badge/Built_with-Claude-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 
 </div>
 
 ---
 
-跑的是**真实的数学运算**，不是预录的动画。真的 softmax、真的反向传播、真的 KV Cache 增长曲线 —— 改参数就能看到数值实时变化。面向想系统理解大模型底层逻辑的人，尤其是训推方向的 AI 产品经理。
+使用的是**真实的数学运算**，不是预录的动画。真的 softmax、反向传播、KV Cache 增长曲线 —— 修改参数就能看到数值实时变化。面向想系统理解大模型底层逻辑的人，尤其是训推方向的 AI 从业人员和学者。本项目使用了**Claude opus 4.8** 辅助实现。
 
 > 内置**两个领域**，点左上角标题下拉切换：**深度学习架构可视化**（神经网络 → Transformer → 大模型生命周期）与**机器学习架构可视化**（经典 ML：分类/回归/聚类/时序/评分卡）。
 
@@ -55,7 +56,7 @@ npm run preview  # 本地预览打包结果
 
 ## 🗺 学习路线
 
-分成两大块：前半段理解**架构怎么一步步演进到 Transformer**，后半段走完一条真实大模型从**原始文本到线上服务**的完整生命周期。
+深度学习分成两大块：前半段理解**架构怎么一步步演进到 Transformer**，后半段走完一条真实大模型从**原始文本到线上服务**的完整生命周期。
 
 ### 基础与架构演进
 
@@ -80,7 +81,7 @@ npm run preview  # 本地预览打包结果
 
 > 这条链路刻意覆盖了 PM 最该懂的全貌：**文本怎么变数字 → 怎么训出 base 模型 → 怎么对齐成助手 → 怎么低成本微调 → 怎么高效推理**。
 
-### 机器学习架构可视化（另一个领域）
+### 机器学习架构可视化
 
 点左上角标题下拉切到「机器学习架构可视化」，从经典 ML 的演进一路走到主流应用场景，覆盖分类、回归、聚类、时序、评分卡，并配有特征工程与五个完整实战案例（鸢尾花 / 泰坦尼克 / 波士顿房价 / 客户分群 / 航空客流）。每个模块同样跑真实计算，并点明对应的主流框架（sklearn / XGBoost / LightGBM / statsmodels）。
 
@@ -156,7 +157,7 @@ src/
 - **改注意力的输入句子** —— 页面上直接在输入框改，或改 `Attention.jsx` 的 `DEFAULT_TOKENS`。
 - **改主题配色** —— 改 `src/styles/global.css` 顶部 `:root` 的 CSS 变量。
 
-改完保存，Vite 会热更新，浏览器立即刷新 —— 改代码 → 看流程变化的闭环就是这么转的。
+改完保存，Vite 会热更新，浏览器立即刷新。
 
 ## 🛠 技术栈
 
