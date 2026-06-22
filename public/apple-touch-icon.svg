@@ -1,0 +1,20 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b9dff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background with rounded corners for iOS -->
+  <rect width="180" height="180" rx="40" fill="url(#grad)"/>
+
+  <!-- DL text -->
+  <text x="90" y="120"
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
+        font-size="80"
+        font-weight="700"
+        fill="white"
+        text-anchor="middle"
+        letter-spacing="-3">DL</text>
+</svg>
